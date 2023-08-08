@@ -1,7 +1,8 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import c from './Header.module.css'
-import { useRef } from 'react'
-import Canvas from '../Canvas/Canvas';
+import CanvasTest from '../Canvas/CanvasTest';
+import CanvasContainer from '../Canvas/CanvasContainer';
+import Starfield from '../Canvas/CanvasTest';
 
 const Header = () => {
 
@@ -31,7 +32,7 @@ const Header = () => {
                 </nav>
             </div>
             <div className={c.header_content}>
-                <Canvas/>
+                <CanvasTest/>
             </div>
             
         </header>

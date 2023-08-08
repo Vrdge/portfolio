@@ -85,15 +85,7 @@
         starfield.width=w;
         starfield.height=h;
         context=starfield.getContext('2d');
-        //context.lineCap='round';
-        context.fillStyle='rgb(0,0,0)';
         context.strokeStyle='rgb(255,255,255)';
-        var adsense=$i('adsense');
-        adsense.style.left=Math.round((w-728)/2)+'px';
-        adsense.style.top=(h-15)+'px';
-        adsense.style.width=728+'px';
-        adsense.style.height=15+'px';
-        adsense.style.display='block';
         }
     
     function anim()
@@ -118,74 +110,11 @@
                 context.moveTo(star_x_save,star_y_save);
                 context.lineTo(star[i][3],star[i][4]);
                 context.stroke();
-                context.closePath();
+                // context.closePath();
                 }
             }
         timeout=setTimeout('anim()',fps);
         }
-    
-    function move(evt)
-        {
-        evt=evt||event;
-        cursor_x=evt.pageX-canvas_x;
-        cursor_y=evt.pageY-canvas_y;
-        }
-    
-    function key_manager(evt)
-        {
-        evt=evt||event;
-        key=evt.which||evt.keyCode;
-        //ctrl=evt.ctrlKey;
-        switch(key)
-            {
-            case 27:
-                flag=flag?false:true;
-                if(flag)
-                    {
-                    timeout=setTimeout('anim()',fps);
-                    }
-                else
-                    {
-                    clearTimeout(timeout);
-                    }
-                break;
-            case 32:
-                star_speed_save=(star_speed!=0)?star_speed:star_speed_save;
-                star_speed=(star_speed!=0)?0:star_speed_save;
-                break;
-            case 13:
-                context.fillStyle='rgba(0,0,0,'+opacity+')';
-                break;
-            }
-        top.status='key='+((key<100)?'0':'')+((key<10)?'0':'')+key;
-        }
-    
-    function release()
-        {
-        switch(key)
-            {
-            case 13:
-                context.fillStyle='rgb(0,0,0)';
-                break;
-            }
-        }
-    
-    function mouse_wheel(evt)
-        {
-        evt=evt||event;
-        var delta=0;
-        if(evt.wheelDelta)
-            {
-            delta=evt.wheelDelta/120;
-            }
-        else if(evt.detail)
-            {
-            delta=-evt.detail/3;
-            }
-        star_speed+=(delta>=0)?-0.2:0.2;
-        if(evt.preventDefault) evt.preventDefault();
-        }
-    
     function start()
         {
         resize();
@@ -199,21 +128,17 @@
         x=Math.round(w/2);
         y=Math.round(h/2);
         z=(w+h)/2;
-        star_color_ratio=1/z;
+        star_color_ratio=1.5/z;
         cursor_x=x;
         cursor_y=y;
         init();
         }
     
-    document.onmousemove=move;
-    document.onkeypress=key_manager;
-    document.onkeyup=release;
-    document.onmousewheel=mouse_wheel; if(window.addEventListener) window.addEventListener('DOMMouseScroll',mouse_wheel,false);
+
     
-    </script><meta http-equiv="origin-trial" content="AzoawhTRDevLR66Y6MROu167EDncFPBvcKOaQispTo9ouEt5LvcBjnRFqiAByRT+2cDHG1Yj4dXwpLeIhc98/gIAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A6+nc62kbJgC46ypOwRsNW6RkDn2x7tgRh0wp7jb3DtFF7oEhu1hhm4rdZHZ6zXvnKZLlYcBlQUImC4d3kKihAcAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A/9La288e7MDEU2ifusFnMg1C2Ij6uoa/Z/ylwJIXSsWfK37oESIPbxbt4IU86OGqDEPnNVruUiMjfKo65H/CQwAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><link rel="preload" href="./Starfield_files/f(3).txt" as="script"><script type="text/javascript" src="./Starfield_files/f(3).txt"></script><style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style><meta http-equiv="origin-trial" content="AzoawhTRDevLR66Y6MROu167EDncFPBvcKOaQispTo9ouEt5LvcBjnRFqiAByRT+2cDHG1Yj4dXwpLeIhc98/gIAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A6+nc62kbJgC46ypOwRsNW6RkDn2x7tgRh0wp7jb3DtFF7oEhu1hhm4rdZHZ6zXvnKZLlYcBlQUImC4d3kKihAcAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A/9La288e7MDEU2ifusFnMg1C2Ij6uoa/Z/ylwJIXSsWfK37oESIPbxbt4IU86OGqDEPnNVruUiMjfKo65H/CQwAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="></head>
-    <body onload="start()" onresize="resize()" onorientationchange="resize()" onmousedown="context.fillStyleзrgba(0,0,0,&#39;+opacity+&#39;)&#39;" onmouseup="context.fillStyle=&#39;rgb(0,0,0)&#39;">
-    <canvas id="starfield" style="background-color: rgb(0, 0, 0); position: absolute; left:0; right:0; top:0; bottom:0;" width="1600" height="732"></canvas>
-    <div id="adsense" style="position: absolute; background-color: transparent; display: block; left: 436px; top: 717px; width: 728px; height: 15px;">  
+    </script>
+    <body onload="start()" >
+    <canvas id="starfield"></canvas>
     </div>
     
     
