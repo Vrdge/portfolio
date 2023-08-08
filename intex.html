@@ -85,7 +85,7 @@
         starfield.width=w;
         starfield.height=h;
         context=starfield.getContext('2d');
-        //context.lineCap='round';
+        context.lineCap='round';
         context.fillStyle='rgb(0,0,0)';
         context.strokeStyle='rgb(255,255,255)';
         var adsense=$i('adsense');
@@ -98,6 +98,7 @@
     
     function anim()
         {
+            
         mouse_x=cursor_x-x;
         mouse_y=cursor_y-y;
         context.fillRect(0,0,w,h);
@@ -139,6 +140,7 @@
         switch(key)
             {
             case 27:
+                console.log('araa');
                 flag=flag?false:true;
                 if(flag)
                     {
