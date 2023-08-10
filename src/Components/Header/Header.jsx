@@ -1,11 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import c from './Header.module.css'
-import CanvasTest from '../Canvas/CanvasTest';
 import CanvasContainer from '../Canvas/CanvasContainer';
-import Starfield from '../Canvas/CanvasTest';
 
-const Header = () => {
-
+const Header = (props) => {
 
     return (
         <header >
@@ -15,24 +12,22 @@ const Header = () => {
                 </div>
                 <nav>
                     <ul>
-                        <NavLink to={'/projects'}  className={c.navlink}>point</NavLink>
+                        <NavLink to={'/main'}  className={c.navlink}>Main</NavLink>
                     </ul>
                     <ul>
-                        <NavLink to={'/info'}  className={c.navlink}>point</NavLink>
+                        <NavLink to={'/about'}  className={c.navlink}>About</NavLink>
 
                     </ul>
                     <ul>
-                        <NavLink to={'/auousdhuia'} className={c.navlink}>point</NavLink>
+                        <NavLink to={'/Projects'} className={c.navlink}>Projects</NavLink>
 
                     </ul>
-                    <ul>
-                        <NavLink to={'/ajshd'}  className={c.navlink}>point</NavLink>
 
-                    </ul>
                 </nav>
             </div>
             <div className={c.header_content}>
-                <CanvasTest/>
+                <CanvasContainer {...props}/>
+            <h1>kjasd</h1>
             </div>
             
         </header>

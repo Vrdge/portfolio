@@ -1,4 +1,5 @@
-import CanvasTest from "./CanvasTest"
+import { useEffect } from "react"
+import CanvasStar from "./CanvasStar"
 
 
 
@@ -13,12 +14,16 @@ import CanvasTest from "./CanvasTest"
 
 
 const CanvasContainer = () => {
-    
 
+    const get_screen_size = () => {
+        let w = document.documentElement.clientWidth
+        let h = document.documentElement.clientHeight
+        return Array(w, h)
+    }
     return (
 
 
-        <CanvasTest />
+        <CanvasStar getScreenSize = {get_screen_size} />
     )
 }
 

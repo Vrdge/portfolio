@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';

@@ -1,7 +1,7 @@
 .header_inner {
     width: 100%;
     display: flex;
-    background-color: rgba(225, 86, 86, 0.5);
+    background-color: rgba(0, 0, 0, 0);
     position: fixed;
     justify-content: space-around;
     z-index:999 ;
