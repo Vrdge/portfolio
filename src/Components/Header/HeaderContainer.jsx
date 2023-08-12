@@ -5,11 +5,14 @@ import Header from "./Header"
 
 
 
-
 const HeaderContainer = (props)=>{
     return(
         <Header {...props}/>
     )
 }
-
-export default HeaderContainer
+let mapStateToProps = (state)=>{
+    return{
+        EditMode: state.App.mode
+    }
+}
+export default connect(mapStateToProps)(HeaderContainer)

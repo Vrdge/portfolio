@@ -1,13 +1,15 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import classes from './Canvas.module.css'
 import $ from "jquery";
-import classes from './alisdlias.module.css'
-
-/*Variables*/
 
 
-const CanvasStar = (props) => {
-    const { getScreenSize } = props
+const CanvasContainer = (props) => {
 
+    const getScreenSize = () => {
+        let w = document.documentElement.clientWidth
+        let h = document.documentElement.clientHeight
+        return Array(w, h)
+    }
 
     /*Variables*/
 
@@ -46,16 +48,26 @@ const CanvasStar = (props) => {
 
 
 
+
     const StarFieldRef = useRef(null)
-
-
-
+    const [isMoveable, setMovable]= useState(false)
     useEffect(() => {
-        const Canvas = StarFieldRef.current
+
+
+        if (props.EditMode === true) {
+            setMovable(true)
+        }else{
+            setMovable(false)
+        }
+
+
+        const Canvas =StarFieldRef.current
+
+
         const context = Canvas.getContext('2d')
 
-        w = parseInt((url.indexOf('w=') != -1) ? url.substring(url.indexOf('w=') + 2, ((url.substring(url.indexOf('w=') + 2, url.length)).indexOf('&') != -1) ? url.indexOf('w=') + 2 + (url.substring(url.indexOf('w=') + 2, url.length)).indexOf('&') : url.length) : getScreenSize()[0]);
-        h = parseInt((url.indexOf('h=') != -1) ? url.substring(url.indexOf('h=') + 2, ((url.substring(url.indexOf('h=') + 2, url.length)).indexOf('&') != -1) ? url.indexOf('h=') + 2 + (url.substring(url.indexOf('h=') + 2, url.length)).indexOf('&') : url.length) : getScreenSize()[1]);
+        w = getScreenSize()[0];
+        h = getScreenSize()[1];
         x = Math.round(w / 2);
         y = Math.round(h / 2);
         z = (w + h) / 2;
@@ -77,7 +89,7 @@ const CanvasStar = (props) => {
         Canvas.style.position = 'absolute';
         Canvas.width = w;
         Canvas.height = h;
-        context.fillStyle='rgba(0,0,0)'
+        context.fillStyle = 'rgba(0,0,0)'
         context.strokeStyle = 'rgb(255,255,255)';
 
 
@@ -108,12 +120,9 @@ const CanvasStar = (props) => {
 
 
 
-        $(document)
-        .on('mousedown',()=>{context.fillStyle='rgba(0,0,0,'+opacity+')'}).on('mouseup',()=>{context.fillStyle='rgba(0,0,0)'},)
-        .on('dblclick',()=>{context.fillStyle='rgba(0,0,0,'+opacity+')'})
-        // $(document).on('mouseup',()=>{context.fillStyle='rgba(0,0,0)'}, { passive: false })
-
-
+            $(document)
+                .on('mousedown', () => { context.fillStyle = 'rgba(0,0,0,' + opacity + ')' }).on('mouseup', () => { context.fillStyle = 'rgba(0,0,0)' },)
+                .on('dblclick', () => { context.fillStyle = 'rgba(0,0,0,' + opacity + ')' })
         let AnimationId
         let count = 0;
         const render = () => {
@@ -122,41 +131,39 @@ const CanvasStar = (props) => {
         }
         render()
         return () => { window.cancelAnimationFrame(AnimationId) }
-    }, [])
-
-    const handleScroll = (event) => {
-        if (star_speed <= 16 && star_speed >= -16) {
-            let delta = 0
-            if (event.wheelDelta) {
-                delta = event.wheelDelta / 120;
-            }
-            else if (event.detail) {
-                delta = -event.detail / 3;
-            }
-            star_speed += (event.originalEvent.wheelDelta >= 0 ? (star_speed < -15 ? 0 : -0.5) : (star_speed > 15 ? 0 : 0.5))
-            // if (event.preventDefault) event.preventDefault();
-        } else {
-            return
-        }
-    }
+    }, [props.EditMode])
     const handleMouseMove = (event) => {
+
         const marginWidth = 600
         const marginHeight = 300
-        if (event.pageX <= w - marginWidth && event.pageX >= marginWidth) {
+        if (event.pageX <= w - marginWidth && event.pageX >= marginWidth && isMoveable === true) {
             cursor_x = event.pageX
         }
-        if (event.pageY <= h - marginHeight && event.pageY >= marginHeight) {
+        if (event.pageY <= h - marginHeight && event.pageY >= marginHeight && isMoveable === true) {
             cursor_y = event.pageY
         }
     }
 
-    $(document).on('mousewheel', (event) => { handleScroll(event) }).on('mousemove', (event) => { handleMouseMove(event) })
+    const handleScroll = (event) => {
+
+        if (star_speed <= 16 && star_speed >= -16) {
+            star_speed += (event.originalEvent.wheelDelta >= 0 ? (star_speed < -15 ? 0 : -0.5) : (star_speed > 15 ? 0 : 0.5))
+        } else {
+            return
+        }
+    }
+
+    $(document).on('mousewheel', (event) => { handleScroll(event) }).on('mousemove', (event) => {handleMouseMove(event,cursor_x,cursor_y,w,h) })
+
 
     return (
-        <div >
+
+
+        <div id="CanvasW" >
             <canvas className={classes.canvas} ref={StarFieldRef} id="Canvas"></canvas>
-        </div>
-    )
+        </div>    )
 }
 
-export default CanvasStar
+
+
+export default CanvasContainer
