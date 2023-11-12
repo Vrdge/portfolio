@@ -16,51 +16,33 @@ const CanvasContainer = (props) => {
     let url = document.location.href;
 
     let n = parseInt((url.indexOf('n=') != -1) ? url.substring(url.indexOf('n=') + 4, ((url.substring(url.indexOf('n=') + 4, url.length)).indexOf('&') != -1) ? url.indexOf('n=') + 4 + (url.substring(url.indexOf('n=') + 4, url.length)).indexOf('&') : url.length) : 1024);
-    var w = 0;
-    var h = 0;
-    var x = 0;
-    var y = 0;
-    var z = 0;
-    var star_color_ratio = 0;
-    var star_x_save, star_y_save;
-    var star_ratio = 512;
-    var star_speed = 4;
-    var star_speed_save = 0;
-    var star = new Array(n);
-    var color;
-    var opacity = 0.45;
-    var cursor_x = 0;
-    var cursor_y = 0;
-    var mouse_x = 0;
-    var mouse_y = 0;
+    let w = 0;
+    let h = 0;
+    let x = 0;
+    let y = 0;
+    let z = 0;
+    let star_color_ratio = 0;
+    let star_x_save, star_y_save;
+    let star_ratio = 512;
+    let star_speed = 4;
+    let star = new Array(n);
+    let opacity = 0.45;
+    let cursor_x = 0;
+    let cursor_y = 0;
+    let mouse_x = 0;
+    let mouse_y = 0;
 
-    var canvas_x = 0;
-    var canvas_y = 0;
-    var canvas_w = 0;
-    var canvas_h = 0;
 
-    var key;
-    var ctrl;
 
-    var timeout;
-    var fps = 0;
     let test = true
 
 
 
 
     const StarFieldRef = useRef(null)
-    const [isMoveable, setMovable]= useState(false)
+    const [isMoveable,  ]= useState(false)
+
     useEffect(() => {
-
-
-        if (props.EditMode === true) {
-            setMovable(true)
-        }else{
-            setMovable(false)
-        }
-
-
         const Canvas =StarFieldRef.current
 
 
@@ -74,8 +56,7 @@ const CanvasContainer = (props) => {
         star_color_ratio = .75 / z;
         cursor_x = x;
         cursor_y = y;
-        var a = 0;
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             star[i] = new Array(5);
             star[i][0] = Math.random() * w * 2 - x * 2;
             star[i][1] = Math.random() * h * 2 - y * 2;
@@ -98,7 +79,7 @@ const CanvasContainer = (props) => {
             mouse_x = cursor_x - x;
             mouse_y = cursor_y - y;
             context.fillRect(0, 0, w, h);
-            for (var i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 test = true;
                 star_x_save = star[i][3];
                 star_y_save = star[i][4];
@@ -131,15 +112,16 @@ const CanvasContainer = (props) => {
         }
         render()
         return () => { window.cancelAnimationFrame(AnimationId) }
-    }, [props.EditMode])
+    }, [])
+
     const handleMouseMove = (event) => {
 
         const marginWidth = 600
         const marginHeight = 300
-        if (event.pageX <= w - marginWidth && event.pageX >= marginWidth && isMoveable === true) {
+        if (event.pageX <= w - marginWidth && event.pageX >= marginWidth ) {
             cursor_x = event.pageX
         }
-        if (event.pageY <= h - marginHeight && event.pageY >= marginHeight && isMoveable === true) {
+        if (event.pageY <= h - marginHeight && event.pageY >= marginHeight) {
             cursor_y = event.pageY
         }
     }
@@ -153,7 +135,7 @@ const CanvasContainer = (props) => {
         }
     }
 
-    $(document).on('mousewheel', (event) => { handleScroll(event) }).on('mousemove', (event) => {handleMouseMove(event,cursor_x,cursor_y,w,h) })
+    $(document).on('mousewheel', (event) => { handleScroll(event) }).on(props.EditMode && 'mousemove', (event) => {handleMouseMove(event,cursor_x,cursor_y,w,h);console.log('afdaaasd'); })
 
 
     return (
